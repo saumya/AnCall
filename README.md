@@ -1,6 +1,6 @@
 AnCall
 ============
-An OpenFL Android Extension to call a phpone number
+An OpenFL Android Extension to call a phone number
 
 ### Usage
 ```
