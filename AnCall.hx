@@ -1,48 +1,17 @@
 package;
 
-#if cpp
-import cpp.Lib;
-#elseif neko
-import neko.Lib;
-#end
-
 #if (android && openfl)
-import openfl.utils.JNI;
-#end
 
+import lime.system.JNI;
 
 class AnCall {
 	
-	
-	public static function sampleMethod (inputValue:Int):Int {
-		
-		#if (android && openfl)
-		
-		var resultJNI = ancall_sample_method_jni(inputValue);
-		var resultNative = ancall_sample_method(inputValue);
-		
-		if (resultJNI != resultNative) {
-			
-			throw "Fuzzy math!";
-			
-		}
-		
-		return resultNative;
-		
-		#else
-		
-		return ancall_sample_method(inputValue);
-		
-		#end
-		
+	public static function callNum(numString:String):Void{
+		ancall_call_num_jni(numString);
 	}
 	
-	
-	private static var ancall_sample_method = Lib.load ("ancall", "ancall_sample_method", 1);
-	
-	#if (android && openfl)
-	private static var ancall_sample_method_jni = JNI.createStaticMethod ("org.haxe.extension.AnCall", "sampleMethod", "(I)I");
-	#end
-	
+	//private static var ancall_sample_method_jni = JNI.createStaticMethod ("org.haxe.extension.AnCall", "sampleMethod", "(I)I");
+	private static var ancall_call_num_jni = JNI.createStaticMethod ("org.haxe.extension.AnCall", "callPhoneNum", "(Ljava/lang/String;)V");
 	
 }
+#end

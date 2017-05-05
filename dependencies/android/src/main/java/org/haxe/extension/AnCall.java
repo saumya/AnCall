@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import android.net.Uri;
+import java.lang.String;
+import android.util.Log;
+
 
 /* 
 	You can use the Android Extension class in order to hook
@@ -38,11 +42,18 @@ import android.view.View;
 */
 public class AnCall extends Extension {
 	
-	
-	public static int sampleMethod (int inputValue) {
-		
-		return inputValue * 100;
-		
+	public static void callPhoneNum(final String phoneNum){
+
+		Extension.mainActivity.runOnUiThread(new Runnable() {
+			@Override public void run() {
+				String s = "tel:"+phoneNum;
+				Uri uri = Uri.parse(s);
+				Intent intent = new Intent(Intent.ACTION_CALL,uri);
+				//Intent intent = new Intent(Intent.ACTION_DIAL,uri);
+				Extension.mainActivity.startActivity(intent);
+			}
+		});
+
 	}
 	
 	
